@@ -14,3 +14,7 @@
 ### Start the app
 
 `yarn start`
+
+## Documentation Links
+
+- https://tailwindcss.com/docs/
