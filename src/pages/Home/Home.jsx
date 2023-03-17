@@ -17,7 +17,11 @@ const Home = () => {
     getData();
   }, []);
 
-  return <div>{data}</div>;
+  return (
+    <>
+      <div className="text-3xl font-bold text-red-500">{data}</div>
+    </>
+  );
 };
 
 export default Home;
