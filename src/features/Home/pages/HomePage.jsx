@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "../../../lib/axios";
+import MainGraph from "../components/MainGraph";
 
 const HomePage = () => {
   const [data, setData] = useState();
@@ -21,9 +22,14 @@ const HomePage = () => {
   }, []);
 
   return (
-    <pre className="font-medium text-gray-800">
-      {JSON.stringify(data, null, 2)}
-    </pre>
+    <>
+      <pre className="font-medium text-gray-800">
+        {JSON.stringify(data, null, 2)}
+      </pre>
+      <div className="h-100 w-500">
+        <MainGraph />
+      </div>
+    </>
   );
 };
 
