@@ -9,8 +9,8 @@ const HomePage = () => {
   const getData = async () => {
     try {
       const res = await axios("/api/data");
-      console.log(res.data[0]);
-      setData(res.data[0]);
+      console.log(res.data);
+      setData(res.data);
     } catch (e) {
       console.log(e);
     }
