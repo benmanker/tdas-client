@@ -3,28 +3,27 @@ import axios from "../../../lib/axios";
 import MainGraph from "../components/MainGraph";
 
 const HomePage = () => {
-  const [isLoading, setIsloading] = useState(true);
-  const [testData, setTestData] = useState();
+  const [mainGraphData, setMainGraphData] = useState();
+  const [graphDataIsLoading, setGraphDataIsLoading] = useState(true);
 
   const getTestData = async () => {
     try {
       const res = await axios("/api/data");
-      setTestData(res.data);
+      setMainGraphData(res.data);
+      setGraphDataIsLoading(false);
       // console.log(res.data.daq.data);
-      setIsloading(false);
     } catch (e) {
-      console.log(e);
+      // console.log(e);
     }
   };
 
+  // fetch data on component mount
   useEffect(() => {
     getTestData();
   }, []);
 
   return (
-    <div className="">
-      {!isLoading && <MainGraph testData={testData} isLoading={isLoading} />}
-    </div>
+    <>{!graphDataIsLoading && <MainGraph mainGraphData={mainGraphData} />}</>
   );
 };
 
