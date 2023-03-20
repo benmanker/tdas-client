@@ -57,7 +57,7 @@ const MainGraph = (props) => {
   }, []);
 
   return (
-    <div className="pt-1 bg-red-500">
+    <div className="pt-1">
       <Plot data={traces} layout={layout} />
     </div>
   );
