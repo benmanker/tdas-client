@@ -33,6 +33,8 @@ const MainGraph = (props) => {
 
   // visual settings for the graph
   const layout = {
+    // paper_bgcolor: "rgba(0,0,0,0)",
+    // plot_bgcolor: "rgba(0,0,0,0)",
     title: "Time, Temperature, and Power",
     yaxis: { title: "Temperature (C)" },
     xaxis: { title: "Time (S)" },

@@ -23,7 +23,9 @@ const HomePage = () => {
   }, []);
 
   return (
-    <>{!graphDataIsLoading && <MainGraph mainGraphData={mainGraphData} />}</>
+    <div>
+      {!graphDataIsLoading && <MainGraph mainGraphData={mainGraphData} />}
+    </div>
   );
 };
 
