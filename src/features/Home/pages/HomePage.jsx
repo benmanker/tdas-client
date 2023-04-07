@@ -23,7 +23,7 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div>
+    <div className="ml-52">
       {!graphDataIsLoading && <MainGraph mainGraphData={mainGraphData} />}
     </div>
   );
