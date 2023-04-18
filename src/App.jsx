@@ -10,7 +10,7 @@ function App() {
       <Route element={<Navbar />}>
         <Route path="test/:testId" element={<HomePage />} />
         <Route path="upload" element={<UploadPage />} />
-        <Route path="*" element={<UploadPage />} />
+        <Route path="*" element={<HomePage />} />
       </Route>
     </Routes>
   );

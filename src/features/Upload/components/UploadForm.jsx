@@ -1,8 +1,13 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import axios from "../../../lib/axios";
 
 const UploadForm = () => {
   const [file, setFile] = useState(null);
+  const [fileIsUploading, setFileIsUploading] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleFileChange = (e) => {
     setFile(e.target.files[0]);
@@ -19,21 +24,30 @@ const UploadForm = () => {
     formData.append("file", file);
 
     try {
-      const response = await axios.post("/api/data/upload", formData);
-
-      console.log(response.data);
-      alert("File uploaded successfully");
+      setFileIsUploading(true);
+      const res = await axios.post("/api/data/upload", formData);
+      if (res?.data?.testId != undefined) {
+        alert("File uploaded successfully");
+        navigate("/test/" + res?.data?.testId);
+      }
     } catch (error) {
       console.error(error);
       alert("Failed to upload the file");
     }
+    setFileIsUploading(false);
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="file" accept=".xlsx" onChange={handleFileChange} />
-      <button type="submit">Upload</button>
-    </form>
+    <>
+      {fileIsUploading ? (
+        <div>uploading file...</div>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <input type="file" accept=".xlsx" onChange={handleFileChange} />
+          <button type="submit">Upload</button>
+        </form>
+      )}
+    </>
   );
 };
 
