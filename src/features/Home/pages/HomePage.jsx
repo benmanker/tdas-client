@@ -4,7 +4,7 @@ import axios from "../../../lib/axios";
 import MainGraph from "../components/MainGraph";
 import TimeAveragedTable from "../components/TimeAveragedTable";
 import { BsFillTrash3Fill } from "react-icons/bs";
-import RemoveTestToast from "../components/removeTestToast";
+import CalculationsTab from "../components/CalculationsTab";
 
 const HomePage = () => {
   const [mainGraphData, setMainGraphData] = useState();
@@ -13,6 +13,8 @@ const HomePage = () => {
   const [testInfo, setTestInfo] = useState();
   const [testIsSelected, setTestIsSelected] = useState(true);
   const [testExists, setTestExists] = useState(true);
+
+  const [tabSelection, setTabSelection] = useState(1);
 
   const { testId } = useParams();
 
@@ -33,8 +35,9 @@ const HomePage = () => {
         sensorNames: res?.data?.graph?.sensorNames,
         timeAveragedTable: res?.data?.timeAveragedTable,
       });
+      // console.log(res?.data?.graph?.sensorNames);
       setTestDataIsLoading(false);
-      console.log(res?.data);
+      // console.log(res?.data);
     } catch (e) {
       // console.log(e);
     }
@@ -54,9 +57,9 @@ const HomePage = () => {
     getTestData();
   };
 
-  // fetch data on component mount
   useEffect(() => {
     if (testId) {
+      setTabSelection(1);
       setTestExists(true);
       setTestDataIsLoading(true);
       setTestIsSelected(true);
@@ -68,34 +71,61 @@ const HomePage = () => {
     }
   }, [testId]);
 
-  // useEffect(() => {
-  //   console.log(testIsSelected);
-  // }, [testIsSelected]);
-
   return (
     <div className="m-0">
-      {!testIsSelected && !testDataIsLoading && <div>Please Select a Test</div>}
-      {testDataIsLoading && testIsSelected && <div>loading test...</div>}{" "}
-      {!testDataIsLoading && testIsSelected && testExists && (
-        <>
-          <div className="flex">
-            Title: {testInfo?.setup?.title}
-            <BsFillTrash3Fill
-              className="cursor-pointer mt-1 ml-3"
-              onClick={() => removeTestById(testId)}
-            />
-          </div>
-        </>
+      <div className="h-10 bg-gray-500 flex">
+        <div
+          className="w-40 m-1.5 h-auto bg-gray-300 cursor-pointer text-center"
+          onClick={() => {
+            setTabSelection(1);
+          }}
+        >
+          Home
+        </div>
+        <div
+          className="w-40 m-1.5 ml-0 h-auto bg-gray-300 cursor-pointer text-center"
+          onClick={() => {
+            setTabSelection(2);
+          }}
+        >
+          Calculations
+        </div>
+      </div>
+
+      {tabSelection == 1 && (
+        <div className="m-0">
+          {!testIsSelected && !testDataIsLoading && (
+            <div>Please Select a Test</div>
+          )}
+          {testDataIsLoading && testIsSelected && <div>loading test...</div>}{" "}
+          {!testDataIsLoading && testIsSelected && testExists && (
+            <>
+              <div className="flex">
+                Title: {testInfo?.setup?.title}
+                <BsFillTrash3Fill
+                  className="cursor-pointer mt-1 ml-3"
+                  onClick={() => removeTestById(testId)}
+                />
+              </div>
+            </>
+          )}
+          {!testDataIsLoading && testIsSelected && testExists && (
+            <MainGraph mainGraphData={mainGraphData} />
+          )}
+          {!testDataIsLoading && testIsSelected && testExists && (
+            <TimeAveragedTable data={timeAveragedTableData} />
+          )}
+          {!testExists && testIsSelected && (
+            <div>Could not find a testId: {testId} </div>
+          )}
+        </div>
       )}
-      {!testDataIsLoading && testIsSelected && testExists && (
-        <MainGraph mainGraphData={mainGraphData} />
-      )}
-      {!testDataIsLoading && testIsSelected && testExists && (
-        <TimeAveragedTable data={timeAveragedTableData} />
-      )}
-      {!testExists && testIsSelected && (
-        <div>Could not find a testId: {testId} </div>
-      )}
+      {tabSelection == 2 &&
+        !testDataIsLoading &&
+        testIsSelected &&
+        testExists && (
+          <CalculationsTab timeAveragedTableData={timeAveragedTableData} />
+        )}
     </div>
   );
 };

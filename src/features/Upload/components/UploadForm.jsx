@@ -26,6 +26,9 @@ const UploadForm = () => {
     try {
       setFileIsUploading(true);
       const res = await axios.post("/api/data/upload", formData);
+
+      alert(res.data.error);
+
       if (res?.data?.testId != undefined) {
         alert("File uploaded successfully");
         navigate("/test/" + res?.data?.testId);

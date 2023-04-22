@@ -38,9 +38,9 @@ const Navbar = () => {
       </div>
       {/* Side Nav and Outlet Container */}
       <div className="flex h-[calc(100vh-48px)]">
-        <div className=" bg-gray-300 w-[300px] ">
+        <div className=" bg-white w-[300px] border-r-[1px] border-gray-300">
           <ul className="flex flex-col items-start space-y-3 p-4">
-            {listIsLoading ? <li>loading...</li> : <li>All Tests:</li>}
+            {/* {listIsLoading ? <li>loading...</li> : <li>All Tests:</li>} */}
             {list.length > 0 ? (
               list?.map((listitem, index) => (
                 <li key={index}>
@@ -49,7 +49,9 @@ const Navbar = () => {
                     className="text-black"
                   >
                     {testId === listitem._id ? (
-                      <div className="underline">{listitem.setup.title}</div>
+                      <div className="font-medium text-[#0083e1]">
+                        {listitem.setup.title}
+                      </div>
                     ) : (
                       <div>{listitem.setup.title}</div>
                     )}
