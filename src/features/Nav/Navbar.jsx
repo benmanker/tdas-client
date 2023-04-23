@@ -31,9 +31,6 @@ const Navbar = () => {
           </Link>
         </div>
         <div className=" text-white my-auto mr-4">
-          <Link to={{ pathname: "/upload" }} className="">
-            Upload
-          </Link>
         </div>
       </div>
       {/* Side Nav and Outlet Container */}
@@ -61,6 +58,9 @@ const Navbar = () => {
             ) : (
               <div>no tests</div>
             )}
+            <Link to={{ pathname: "/upload" }} className="">
+              Upload
+            </Link>
           </ul>
         </div>
         <div className="overflow-scroll w-full m-0">
