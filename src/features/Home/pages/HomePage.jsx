@@ -73,25 +73,36 @@ const HomePage = () => {
 
   return (
     <div className="m-0">
-      <div className="h-10 bg-gray-500 flex">
-        <div
+      <div className="h-13 flex bg-gray-300 ">
+        {/* <div
           className="w-40 m-1.5 h-auto bg-gray-300 cursor-pointer text-center"
           onClick={() => {
             setTabSelection(1);
           }}
         >
           Home
-        </div>
-        <div
+        </div> */}
+<div class = "flex-initial">
+<button class="bg-black hover:bg-black text-white font-bold py-2 px-4 rounded w-40 m-1.5 h-auto"  onClick={() => {setTabSelection(1);}}>
+          Home
+</button>
+</div>
+        {/* <div
           className="w-40 m-1.5 ml-0 h-auto bg-gray-300 cursor-pointer text-center"
           onClick={() => {
             setTabSelection(2);
           }}
-        >
+        > */}
+        <div class = "flex-initial">
+          <button class="bg-black hover:bg-black text-white font-bold py-2 px-4 rounded w-40 m-1.5 h-auto" onClick={() => {setTabSelection(2)}}>
           Calculations
-        </div>
-      </div>
 
+</button>
+</div>
+
+        {/* </div> */}
+      </div>
+<br />
       {tabSelection == 1 && (
         <div className="m-0">
           {!testIsSelected && !testDataIsLoading && (

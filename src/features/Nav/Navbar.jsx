@@ -30,11 +30,11 @@ const Navbar = () => {
             <img src={NavLogo} className="object-scale-down h-8" />
           </Link>
         </div>
-        <div className=" text-white my-auto mr-4">
+        {/* <div className=" text-white my-auto mr-4">
           <Link to={{ pathname: "/upload" }} className="">
             Upload
           </Link>
-        </div>
+        </div> */}
       </div>
       {/* Side Nav and Outlet Container */}
       <div className="flex h-[calc(100vh-48px)]">
@@ -61,7 +61,10 @@ const Navbar = () => {
             ) : (
               <div>no tests</div>
             )}
+            <li><Link to={{ pathname: "/upload" }} className="" class = "font-bold"> Upload </Link></li>
           </ul>
+
+      
         </div>
         <div className="overflow-scroll w-full m-0">
           <Outlet />
