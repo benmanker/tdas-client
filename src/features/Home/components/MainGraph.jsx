@@ -53,7 +53,7 @@ const MainGraph = (props) => {
 
   // visual settings for the graph
   const layout = {
-    width: 950,
+    width: 1415,
     // autosize: true,
 
     title: "Time, Temperature, and Power",
@@ -88,8 +88,7 @@ const MainGraph = (props) => {
   };
 
   const layout2 = {
-    width: 950,
-    height: 150,
+    width: 1415,
     // autosize: true,
     yaxis: { title: "Watts" },
     xaxis: {
@@ -121,7 +120,7 @@ const MainGraph = (props) => {
   }, []);
 
   return (
-    <div className="pt-1 bg-red-400 h-600 w-[1100px]">
+    <div className="pt-1 bg-400">
       <Plot data={traces} layout={layout} className="" />
       <Plot data={traces2} layout={layout2} />
     </div>
