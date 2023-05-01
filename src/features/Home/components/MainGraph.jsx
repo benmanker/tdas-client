@@ -57,7 +57,7 @@ const MainGraph = (props) => {
   const layout = {
     width: plotWidth,
     autosize: "true",
-    title: "Time, Temperature, and Power",
+    // title: "Time, Temperature, and Power",
     yaxis: { title: "Celsius" },
     xaxis: {
       // title: "Time",
@@ -69,7 +69,7 @@ const MainGraph = (props) => {
       side: "right",
     },
     margin: {
-      t: 75,
+      t: 25,
       r: 290,
       b: 60,
     },
@@ -116,9 +116,9 @@ const MainGraph = (props) => {
   }, []);
 
   return (
-    <div className=" bg-white border-x-[1px] border-b-[1px] border-t-[5px] border-gray-400 mr-[10px]">
+    <div className=" bg-white border-x-[1px] border-b-[1px] border-t-[5px] border-gray-400 ">
       <div className="border-b-[1px] border-gray-400 h-[40px] font-semibold pt-[10px] pl-[10px] text-sm text-gray-800 ">
-        Test Information
+        Temperature and Power Graphs
       </div>
       <Plot data={traces} layout={layout} className="" />
       <Plot data={traces2} layout={layout2} />
