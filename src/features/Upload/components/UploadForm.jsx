@@ -26,6 +26,9 @@ const UploadForm = () => {
     try {
       setFileIsUploading(true);
       const res = await axios.post("/api/data/upload", formData);
+
+      alert(res.data.error);
+
       if (res?.data?.testId != undefined) {
         alert("File uploaded successfully");
         navigate("/test/" + res?.data?.testId);
@@ -44,7 +47,9 @@ const UploadForm = () => {
       ) : (
         <form onSubmit={handleSubmit}>
           <input type="file" accept=".xlsx" onChange={handleFileChange} />
-          <button type="submit">Upload</button>
+          <br/> 
+          <br/> 
+          <button class="bg-black hover:bg-gray-600 text-white font-bold py-2 px-4 rounded" type="submit"> Upload</button>
         </form>
       )}
     </>

@@ -3,21 +3,31 @@ import Plot from "react-plotly.js";
 
 const MainGraph = (props) => {
   const [traces, setTraces] = useState([]);
+  const [traces2, setTraces2] = useState([]);
 
   const generateTraces = () => {
     const timestampsAsLocale = props.mainGraphData.timestamps.map((timestamp) =>
-      new Date(timestamp).toLocaleTimeString()
+      formatDate(new Date(timestamp))
     );
+
+    // const generateTraces = () => {
+    //   const timestampsAsLocale = props.mainGraphData.timestamps.map((timestamp) =>
+    //     new Date(timestamp).toISOString()
+    //   );
+    // toLocaleTimeString()
+    // toLocaleString()
+
+    // console.log(timestampsAsLocale);
 
     // create power trace
     var traces = [];
-    traces.push({
-      x: timestampsAsLocale,
-      y: props.mainGraphData.powers,
-      name: "Power",
-      yaxis: "y2",
-      marker: { color: "black" },
-    });
+    // traces.push({
+    //   x: timestampsAsLocale,
+    //   y: props.mainGraphData.powers,
+    //   name: "Power",
+    //   yaxis: "y2",
+    //   marker: { color: "black" },
+    // });
 
     // create temperature sensor traces
     for (var i = 0; i < props.mainGraphData.sensorNames.length; i++) {
@@ -31,25 +41,76 @@ const MainGraph = (props) => {
 
     // set state with new traces
     setTraces(traces);
+    var traces2 = [];
+    traces2.push({
+      x: timestampsAsLocale,
+      y: props.mainGraphData.powers,
+      name: "Power",
+      marker: { color: "black" },
+    });
+    setTraces2(traces2);
   };
 
   // visual settings for the graph
   const layout = {
+    width: 1415,
+    // autosize: true,
+
     title: "Time, Temperature, and Power",
-    yaxis: { title: "Temperature (C)" },
-    xaxis: { title: "Time (S)" },
+    yaxis: { title: "Celsius" },
+    xaxis: {
+      // title: "Time",
+      type: "date",
+    },
     yaxis2: {
-      title: "Power (W)",
+      title: "Watts",
       overlaying: "y",
       side: "right",
     },
-    height: 600,
-    width: 1200,
+    // height: 600,
+    // width: 1200,
     margin: {
-      t: 70,
-      b: 70,
-      l: 70,
-      pad: 2,
+      t: 75,
+      r: 290,
+      b: 60,
+    },
+    legend: {
+      // orientation: "h",
+      x: 1.13,
+      y: 1,
+      traceorder: "normal",
+      font: {
+        family: "sans-serif",
+        size: 12,
+        color: "#000",
+      },
+    },
+  };
+
+  const layout2 = {
+    width: 1415,
+    // autosize: true,
+    yaxis: { title: "Watts" },
+    xaxis: {
+      // title: "Time",
+      type: "date",
+    },
+    margin: {
+      t: 10,
+      r: 290,
+      b: 38,
+    },
+    showlegend: true,
+    legend: {
+      // orientation: "h",
+      x: 1.13,
+      y: 1,
+      traceorder: "normal",
+      font: {
+        family: "sans-serif",
+        size: 12,
+        color: "#000",
+      },
     },
   };
 
@@ -59,11 +120,25 @@ const MainGraph = (props) => {
   }, []);
 
   return (
-    <div className="pt-1">
-      <Plot data={traces} layout={layout} />
+    <div className="pt-1 bg-400">
+      <Plot data={traces} layout={layout} className="" />
+      <Plot data={traces2} layout={layout2} />
     </div>
   );
 };
+
+function formatDate(date) {
+  const pad = (num) => num.toString().padStart(2, "0");
+
+  const year = date.getFullYear();
+  const month = pad(date.getMonth() + 1);
+  const day = pad(date.getDate());
+  const hours = pad(date.getHours());
+  const minutes = pad(date.getMinutes());
+  const seconds = pad(date.getSeconds());
+
+  return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
 
 export default MainGraph;
 
