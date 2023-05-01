@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Outlet, Link, useParams } from "react-router-dom";
 import axios from "../../lib/axios";
 import NavLogo from "../../assets/nav_logo_1.png";
+import { Button } from "@material-tailwind/react";
+import { BsFillCloudUploadFill } from "react-icons/bs";
 
 const Navbar = () => {
   const [list, setList] = useState([]);
@@ -25,7 +27,7 @@ const Navbar = () => {
     <>
       {/* Top Nav Container */}
       <div className="h-[48px] bg-[#1e1e1e] flex flex-row justify-between">
-        <div className="ml-4 my-2">
+        <div className="ml-[9.5px] my-2">
           <Link to={{ pathname: "/test/" }}>
             <img src={NavLogo} className="object-scale-down h-8" />
           </Link>
@@ -39,6 +41,12 @@ const Navbar = () => {
       {/* Side Nav and Outlet Container */}
       <div className="flex h-[calc(100vh-48px)]">
         <div className=" bg-white w-[300px] border-r-[1px] border-gray-300">
+          <Link to={{ pathname: "/upload" }} className="font-bold">
+            <button className="flex justify-center text-black border border-gray-500 font-bold py-[7px] px-4 rounded w-[238px] m-2 mb-0 h-[38px]">
+              Upload
+              <BsFillCloudUploadFill className="mt-[4px] ml-[10px]" />
+            </button>
+          </Link>
           <ul className="flex flex-col items-start space-y-3 p-4">
             {/* {listIsLoading ? <li>loading...</li> : <li>All Tests:</li>} */}
             {list.length > 0 ? (
@@ -61,10 +69,8 @@ const Navbar = () => {
             ) : (
               <div>no tests</div>
             )}
-            <li><Link to={{ pathname: "/upload" }} className="" class = "font-bold"> Upload </Link></li>
+            <li></li>
           </ul>
-
-      
         </div>
         <div className="overflow-scroll w-full m-0">
           <Outlet />

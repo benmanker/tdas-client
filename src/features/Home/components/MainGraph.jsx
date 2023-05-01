@@ -5,6 +5,8 @@ const MainGraph = (props) => {
   const [traces, setTraces] = useState([]);
   const [traces2, setTraces2] = useState([]);
 
+  const plotWidth = 1000;
+
   const generateTraces = () => {
     const timestampsAsLocale = props.mainGraphData.timestamps.map((timestamp) =>
       formatDate(new Date(timestamp))
@@ -53,9 +55,8 @@ const MainGraph = (props) => {
 
   // visual settings for the graph
   const layout = {
-    width: 1415,
-    // autosize: true,
-
+    width: plotWidth,
+    autosize: "true",
     title: "Time, Temperature, and Power",
     yaxis: { title: "Celsius" },
     xaxis: {
@@ -67,15 +68,12 @@ const MainGraph = (props) => {
       overlaying: "y",
       side: "right",
     },
-    // height: 600,
-    // width: 1200,
     margin: {
       t: 75,
       r: 290,
       b: 60,
     },
     legend: {
-      // orientation: "h",
       x: 1.13,
       y: 1,
       traceorder: "normal",
@@ -88,11 +86,10 @@ const MainGraph = (props) => {
   };
 
   const layout2 = {
-    width: 1415,
-    // autosize: true,
+    height: 150,
+    width: plotWidth,
     yaxis: { title: "Watts" },
     xaxis: {
-      // title: "Time",
       type: "date",
     },
     margin: {
@@ -102,7 +99,6 @@ const MainGraph = (props) => {
     },
     showlegend: true,
     legend: {
-      // orientation: "h",
       x: 1.13,
       y: 1,
       traceorder: "normal",
@@ -120,7 +116,10 @@ const MainGraph = (props) => {
   }, []);
 
   return (
-    <div className="pt-1 bg-400">
+    <div className=" bg-white border-x-[1px] border-b-[1px] border-t-[5px] border-gray-400 mr-[10px]">
+      <div className="border-b-[1px] border-gray-400 h-[40px] font-semibold pt-[10px] pl-[10px] text-sm text-gray-800 ">
+        Test Information
+      </div>
       <Plot data={traces} layout={layout} className="" />
       <Plot data={traces2} layout={layout2} />
     </div>
