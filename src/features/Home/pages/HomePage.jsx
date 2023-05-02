@@ -6,6 +6,7 @@ import TimeAveragedTable from "../components/TimeAveragedTable";
 import { BsFillTrash3Fill } from "react-icons/bs";
 import CalculationsTab from "../components/CalculationsTab";
 import Spinner from "../components/Spinner";
+import CalculatedColumnsTable from "../components/CalculatedColumnsTable";
 
 const HomePage = () => {
   const [mainGraphData, setMainGraphData] = useState();
@@ -14,6 +15,7 @@ const HomePage = () => {
   const [testInfo, setTestInfo] = useState();
   const [testIsSelected, setTestIsSelected] = useState(true);
   const [testExists, setTestExists] = useState(true);
+  const [calculatedColumnsTable, setCalculatedColumnsTable] = useState([]);
 
   const [tabSelection, setTabSelection] = useState(1);
 
@@ -38,13 +40,12 @@ const HomePage = () => {
         return parseInt(parts[parts.length - 1]);
       });
 
-      console.log(formattedSensorNames);
-
       setTimeAveragedTableData({
         sensorNames: formattedSensorNames,
         timeAveragedTable: res?.data?.timeAveragedTable,
       });
       // console.log(res?.data?.graph?.sensorNames);
+      setCalculatedColumnsTable(res?.data?.calculatedColumnsTable);
       setTestDataIsLoading(false);
       console.log(res?.data);
     } catch (e) {
@@ -74,7 +75,6 @@ const HomePage = () => {
       setTestIsSelected(true);
       getTestData();
     } else {
-      console.log(testId);
       setTestIsSelected(false);
       setTestDataIsLoading(false);
     }
@@ -200,6 +200,9 @@ const HomePage = () => {
 
                       <MainGraph mainGraphData={mainGraphData} />
                     </div>
+                    <CalculatedColumnsTable
+                      data={{ timeAveragedTableData, calculatedColumnsTable }}
+                    />
                     {/* <TimeAveragedTable data={timeAveragedTableData} /> */}
                   </div>
                 </div>
