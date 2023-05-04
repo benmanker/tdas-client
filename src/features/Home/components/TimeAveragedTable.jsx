@@ -10,14 +10,17 @@ const TimeAveragedTable = (props) => {
             <th className="font-normal px-1">Power</th>
             {props.data.sensorNames.map((sensorName, index) => (
               <th key={index} className="font-normal px-1">
-                {sensorName}
+                {sensorName.slice(-3)}
               </th>
             ))}
           </tr>
         </thead>
         <tbody>
           {props.data.timeAveragedTable.map((stepObject, index) => (
-            <tr key={index}>
+            <tr
+              key={index}
+              className={index % 2 === 0 ? "bg-gray-200" : "bg-white"}
+            >
               <td className="px-1">{stepObject.powerStepValue}</td>
               {stepObject.sensorAverages.map((sensorReading, index) => (
                 <td className="px-1" key={index}>

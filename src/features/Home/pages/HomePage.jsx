@@ -41,7 +41,7 @@ const HomePage = () => {
       });
 
       setTimeAveragedTableData({
-        sensorNames: formattedSensorNames,
+        sensorNames: res?.data?.graph?.sensorNames,
         timeAveragedTable: res?.data?.timeAveragedTable,
       });
       // console.log(res?.data?.graph?.sensorNames);
